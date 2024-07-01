@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ip2location_db11 {
+  ip_from      BigInt
+  ip_to        BigInt
+  country_code String @db.Char(2)
+  country_name String @db.VarChar(64)
+  region_name  String @db.VarChar(128)
+  city_name    String @db.VarChar(128)
+  latitude     Float  @db.Real
+  longitude    Float  @db.Real
+  zip_code     String @db.VarChar(30)
+  time_zone    String @db.VarChar(8)
+
+  @@id([ip_from, ip_to], map: "ip2location_db1_pkey")
+}
